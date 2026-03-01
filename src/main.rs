@@ -95,15 +95,20 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
 
         // Set the current desktop for xdg-desktop-portal.
+        env::set_var("XDG_CURRENT_DESKTOP", "niri");
+        // Ensure the session type is set to Wayland for xdg-autostart and Qt apps.
+        env::set_var("XDG_SESSION_TYPE", "wayland");
+
+        // Set the current desktop for xdg-desktop-portal.
         // TODO: Audit that the environment access only happens in single-threaded code.
-        unsafe { env::set_var("XDG_CURRENT_DESKTOP", "KDE") };
+        // unsafe { env::set_var("XDG_CURRENT_DESKTOP", "KDE") };
         // Ensure the session type is set to Wayland for xdg-autostart and Qt apps.
         // TODO: Audit that the environment access only happens in single-threaded code.
-        unsafe { env::set_var("XDG_SESSION_TYPE", "wayland") };
+        // unsafe { env::set_var("XDG_SESSION_TYPE", "wayland") };
         // Many KDE apps have certain functionality gated behind these environment variables.
         // TODO: Audit that the environment access only happens in single-threaded code.
-        unsafe { env::set_var("KDE_FULL_SESSION", "true") };
-        unsafe { env::set_var("KDE_SESSION_VERSION", "6") };
+        // unsafe { env::set_var("KDE_FULL_SESSION", "true") };
+        // unsafe { env::set_var("KDE_SESSION_VERSION", "6") };
     }
 
     // Handle subcommands.
