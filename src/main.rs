@@ -95,9 +95,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
 
         // Set the current desktop for xdg-desktop-portal.
-        env::set_var("XDG_CURRENT_DESKTOP", "niri");
+        unsafe { env::set_var("XDG_CURRENT_DESKTOP", "niri") };
         // Ensure the session type is set to Wayland for xdg-autostart and Qt apps.
-        env::set_var("XDG_SESSION_TYPE", "wayland");
+        unsafe { env::set_var("XDG_SESSION_TYPE", "wayland") };
 
         // Set the current desktop for xdg-desktop-portal.
         // TODO: Audit that the environment access only happens in single-threaded code.
